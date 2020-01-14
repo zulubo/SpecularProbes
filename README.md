@@ -4,8 +4,13 @@ Bake specular highlights into Unity Reflection Probes, allowing baked lights to 
 ## Why is this cool?
 Realtime lights are expensive, and especially in VR must be used sparingly. One downside of baked lights is that by default they will not appear in reflections or as specular highlights. I had the idea of baking specular highlights into reflection probes as small, very bright clusters of pixels. Turns out this works supremely well, and creates convincing specular highlights when combined with PBR. This package makes this easy and convenient for artists. 
 
-Here are some examples.
-![Scene Without Specular](/images/scene_nospecular.PNG)        ![Scene With Specular](/images/scene_specular.PNG)
+Check out the difference, here's a scene with some vanilla baked lights.
+
+![Scene Without Specular](/images/scene_nospecular.PNG) 
+
+And then with baked specular lights.
+
+![Scene With Specular](/images/scene_specular.PNG)
 
 
 ## How do I do it?
