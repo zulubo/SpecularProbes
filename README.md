@@ -30,3 +30,7 @@ And that's all you need to know! These components are automatically cleaned up w
 ![Example Screenshot 1](/images/example_01.PNG)
 
 ![Example Screenshot 2](/images/example_02.PNG)
+
+## Wait, how does this work?
+
+Good question! It's a really simple trick. When about to render reflection probes, I spawn small brightly colored spheres around lights. That way, they get rendered into the probe as, like I mentioned before, small clusters of ultra bright pixels. I didn't expect this to work as well as it does, but it's almost indistinguishable from real specular highlights!
