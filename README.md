@@ -19,7 +19,7 @@ And then with baked specular lights.
 
 To mark a light to be included in reflection probes, simply add the `SpecularProbeLight` component to it and configure radius and intensity. To mark a reflection probe to render these specular highlights, add the `SpecularProbeRenderer` component to it. The radius option tells the probe which lights to render, all lights within the radius will be included.
 
-Specular Probes will automatically be rendered when baking lighting for a scene. To bake manually, use the context menu buttons to either bake the currently selected probe, or all specular probes in the scene. **These buttons may not appear on the component**, and you can also access them through the gear button.
+**If using Unity 2019.2 or newer**, Specular Probes will automatically be rendered when baking lighting for a scene. **Otherwise**,To bake manually, use the context menu buttons to either bake the currently selected probe, or all specular probes in the scene. **These buttons may not appear on the component**, and you can also access them through the gear button.
 
 ![Probe Renderer Component](/images/component_renderer.PNG)
 
