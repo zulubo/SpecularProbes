@@ -22,6 +22,8 @@ public class SpecularProbeRenderer : MonoBehaviour {
         if (Application.isPlaying) Destroy(this);
     }
 
+#if UNITY_2019_2_OR_NEWER
+    // Unity added bakeCompleted action in 2019.2
     private void OnEnable()
     {
         UnityEditor.Lightmapping.bakeCompleted += OnBakeCompleted;
@@ -37,6 +39,7 @@ public class SpecularProbeRenderer : MonoBehaviour {
         Debug.Log("Baking Specular Highlights");
         Render();
     }
+#endif
 
     [ContextMenu("Render")]
     public void Render()
