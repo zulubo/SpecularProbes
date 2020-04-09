@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 [RequireComponent(typeof(Light))]
 public class SpecularProbeLight : MonoBehaviour {
@@ -62,10 +63,24 @@ public class SpecularProbeLight : MonoBehaviour {
         instance.transform.parent = transform;
         instance.transform.localPosition = Vector3.zero;
         instance.meshFilter.sharedMesh = ((GameObject)Resources.Load("SpecSphere", typeof(GameObject))).GetComponent<MeshFilter>().sharedMesh;
-        instance.renderer.sharedMaterial = new Material(Shader.Find("Particles/Standard Unlit"))
+
+#if UNITY_2018_1_OR_NEWER
+        if (GraphicsSettings.currentRenderPipeline != null)
         {
-            color = light.color * CalcBrightness()
-        };
+            // Scriptable Render Pipeline Support
+            instance.renderer.sharedMaterial = new Material(GraphicsSettings.currentRenderPipeline.defaultParticleMaterial.shader);
+            instance.renderer.sharedMaterial.SetColor("_BaseColor", light.color * CalcBrightness());
+        }
+        else
+#endif
+        {
+            // Built in Render Pipeline Support
+            instance.renderer.sharedMaterial = new Material(Shader.Find("Particles/Standard Unlit"))
+            {
+                color = light.color * CalcBrightness()
+            };
+        }
+
         instance.gameObject.isStatic = true;
     }
 
@@ -87,4 +102,4 @@ public class SpecularProbeLight : MonoBehaviour {
         return light.intensity * intensityMultiplier * intensityConstant;
     }
 #endif
-}
+    }
