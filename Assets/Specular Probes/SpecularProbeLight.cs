@@ -21,7 +21,7 @@ public class SpecularProbeLight : MonoBehaviour {
     {
         Start();
         Gizmos.color = light.color;
-        Gizmos.DrawWireSphere(transform.position, radius);
+        Gizmos.DrawWireSphere(transform.position, radius * transform.lossyScale.magnitude);
     }
 
     private class LightRenderer
@@ -59,7 +59,7 @@ public class SpecularProbeLight : MonoBehaviour {
             Hide();
         }
         instance = new LightRenderer(new GameObject("lightRenderer"));
-        instance.transform.localScale = Vector3.one * radius;
+        instance.transform.localScale = Vector3.one * radius * transform.lossyScale.magnitude;
         instance.transform.parent = transform;
         instance.transform.localPosition = Vector3.zero;
         instance.meshFilter.sharedMesh = ((GameObject)Resources.Load("SpecSphere", typeof(GameObject))).GetComponent<MeshFilter>().sharedMesh;

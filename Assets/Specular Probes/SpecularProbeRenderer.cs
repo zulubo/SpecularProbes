@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 [ExecuteInEditMode]
 [RequireComponent(typeof(ReflectionProbe))]
-public class SpecularProbeRenderer : MonoBehaviour {
+public class SpecularProbeRenderer : MonoBehaviour
+{
 
 #if UNITY_EDITOR
     [Tooltip("Will only draw specular highlights for lights in this radius")]
@@ -27,17 +28,28 @@ public class SpecularProbeRenderer : MonoBehaviour {
     private void OnEnable()
     {
         UnityEditor.Lightmapping.bakeCompleted += OnBakeCompleted;
+#if BAKERY_INCLUDED
+        ftRenderLightmap.OnFinishedReflectionProbes += OnFinishedReflectionProbes;
+#endif
     }
 
     private void OnDisable()
     {
         UnityEditor.Lightmapping.bakeCompleted -= OnBakeCompleted;
+#if BAKERY_INCLUDED
+        ftRenderLightmap.OnFinishedReflectionProbes -= OnFinishedReflectionProbes;
+#endif
     }
 
     void OnBakeCompleted()
     {
         Debug.Log("Baking Specular Highlights");
         Render();
+    }
+
+    public void OnFinishedReflectionProbes(object sender, System.EventArgs e)
+    {
+        OnBakeCompleted();
     }
 #endif
 
@@ -73,7 +85,7 @@ public class SpecularProbeRenderer : MonoBehaviour {
     [ContextMenu("Render All")]
     public void RenderAll()
     {
-        foreach(SpecularProbeRenderer r in FindObjectsOfType<SpecularProbeRenderer>())
+        foreach (SpecularProbeRenderer r in FindObjectsOfType<SpecularProbeRenderer>())
         {
             r.Render();
         }
